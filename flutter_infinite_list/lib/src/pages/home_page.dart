@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_infinite_list/src/bloc/bloc.dart';
+import 'package:flutter_infinite_list/src/models/post.dart';
+import 'package:flutter_infinite_list/src/widgets/bottom_loader.dart';
+import 'package:flutter_infinite_list/src/widgets/post_widget.dart';
 
 class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
@@ -19,7 +22,38 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return null;
+    return BlocBuilder<PostBloc, PostState>(
+      builder: (context, state) {
+        if (state is PostUninitilized) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is PostError) {
+          return Center(
+            child: Text('failed to fetch posts'),
+          );
+        }
+        if (state is PostLoaded) {
+          if (state.posts.isEmpty) {
+            return Center(
+              child: Text('no posts'),
+            );
+          }
+          return ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return index >= state.posts.length
+                  ? BottomLoader()
+                  : PostWidget(post: state.posts[index]);
+            },
+            itemCount: state.hasReachedMax
+                ? state.posts.length
+                : state.posts.length + 1,
+            controller: _scrollController,
+          );
+        }
+      },
+    );
   }
 
   void _onScroll() {
