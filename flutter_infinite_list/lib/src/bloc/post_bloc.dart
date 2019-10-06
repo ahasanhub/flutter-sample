@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
+import 'package:rxdart/rxdart.dart';
 
 import 'package:flutter_infinite_list/src/bloc/bloc.dart';
 //import 'package:flutter_infinite_list/src/bloc/post_event.dart';
@@ -15,6 +16,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
   @override
   get initialState => PostUninitilized();
+
+  @override
+  Stream<PostState> transformEvents(Stream<PostEvent> events,
+      Stream<PostState> Function(PostEvent event) next) {
+    return super.transformEvents(
+        (events as Observable<PostEvent>)
+            .debounceTime(Duration(milliseconds: 500)),
+        next);
+  }
 
   @override
   Stream<PostState> mapEventToState(PostEvent event) async* {
