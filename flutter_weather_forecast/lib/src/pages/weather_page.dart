@@ -9,8 +9,30 @@ class WeatherPage extends StatefulWidget {
 class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: null,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Fake Weather App'),
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 16),
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text(
+              "City Name",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Text(
+              "35 °C",
+              style: TextStyle(fontSize: 80),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
