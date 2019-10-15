@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_weather_forecast/src/models/weather.dart';
 import './bloc.dart';
 
@@ -11,8 +12,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   @override
   Stream<WeatherState> mapEventToState(WeatherEvent event) async* {
     if (event is GetWeather) {
-      yield WeatherLoaded();
+      yield WeatherLoading();
       final weather = await _fetchWeatherFromFakeApi(event.cityName);
+      debugPrint(weather.tempreture.toString());
       yield WeatherLoaded(weather: weather);
     }
   }
