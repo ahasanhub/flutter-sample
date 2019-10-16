@@ -14,7 +14,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     if (event is GetWeather) {
       yield WeatherLoading();
       final weather = await _fetchWeatherFromFakeApi(event.cityName);
-      debugPrint(weather.tempreture.toString());
+      //debugPrint(weather.tempreture.toString());
       yield WeatherLoaded(weather: weather);
     }
   }

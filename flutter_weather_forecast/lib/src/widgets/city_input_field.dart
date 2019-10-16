@@ -16,8 +16,7 @@ class _CityInputFieldState extends State<CityInputField> {
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextField(
         onSubmitted: (String name) {
-          final weatherBloc = BlocProvider.of<WeatherBloc>(context);
-          weatherBloc.dispatch(GetWeather(cityName: name));
+          _submitCityName(name);
         },
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
@@ -29,7 +28,9 @@ class _CityInputFieldState extends State<CityInputField> {
     );
   }
 
-  void submitCityName(String cityName) {
+  void _submitCityName(String cityName) {
     //Get the bloc using the BlocProvider
+    final weatherBloc = BlocProvider.of<WeatherBloc>(context);
+    weatherBloc.dispatch(GetWeather(cityName: name));
   }
 }
