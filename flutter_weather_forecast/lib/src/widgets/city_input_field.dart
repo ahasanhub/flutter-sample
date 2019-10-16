@@ -31,6 +31,6 @@ class _CityInputFieldState extends State<CityInputField> {
   void _submitCityName(String cityName) {
     //Get the bloc using the BlocProvider
     final weatherBloc = BlocProvider.of<WeatherBloc>(context);
-    weatherBloc.dispatch(GetWeather(cityName: name));
+    weatherBloc.dispatch(GetWeather(cityName: cityName));
   }
 }
