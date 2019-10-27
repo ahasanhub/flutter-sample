@@ -31,12 +31,25 @@ class Weather extends StatelessWidget {
                 child: Text('Please select a location'),
               );
             }
+
             if (state is WeatherLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             }
-            return null;
+
+            if (state is WeatherLoaded) {
+              //final weather = state.weather;
+              return null;
+            }
+
+            if (state is WeatherError) {
+              return Text(
+                'Something went wrong!',
+                style: TextStyle(color: Colors.red),
+              );
+            }
+            //return null;
           },
         ),
       ),
