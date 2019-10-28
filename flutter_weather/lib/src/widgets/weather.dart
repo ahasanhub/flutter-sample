@@ -39,8 +39,26 @@ class Weather extends StatelessWidget {
             }
 
             if (state is WeatherLoaded) {
-              //final weather = state.weather;
-              return null;
+              final weather = state.weather;
+              return ListView(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 100.0),
+                    child: Location(
+                      location: weather.location,
+                    ),
+                  ),
+                  Center(
+                    child: null,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50.0),
+                    child: Center(
+                      child: null,
+                    ),
+                  )
+                ],
+              );
             }
 
             if (state is WeatherError) {
