@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:developer' as dev;
 
 class Location extends StatelessWidget {
   final String location;
@@ -8,8 +9,9 @@ class Location extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    dev.log(location, name: 'location name');
     return Text(
-      location,
+      'Dhaka',
       style: TextStyle(
           fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
     );
